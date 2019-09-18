@@ -28,8 +28,8 @@ before_install:
   - ./util/site-update || travis_retry sudo apt-get update
   - ./util/site-update || travis_retry sudo apt-get install zotero jurism default-jre libreoffice-java-common
 script:
-  - ./util/site-update || ./util/build-assets fetch || travis_terminate 1
-  - ./util/site-update || ./test/behave --no-capture -f travis --tags $TAGS
+  - travis_wait 30 ./util/site-update || travis_wait 30 ./util/build-assets fetch || travis_terminate 1
+  - travis_wait 30 ./util/site-update || travis_wait 30 ./test/behave --no-capture -f travis --tags $TAGS
 
 after_failure:
   - ./util/build-assets pop
